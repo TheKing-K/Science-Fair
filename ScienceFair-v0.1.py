@@ -1,15 +1,15 @@
+#https://www.youtube.com/watch?v=6Qs3wObeWwc
+
 from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
+import os
 
-img = Image.new("RGB", (300, 300), "blue")
+image1 = Image.open("CheesecakePic.jpg")
 
-arr = np.array(img)
-print("Shape:", arr.shape)
+#image1.show()  <-- Show Image
+#image1.save("CheesecakePic.png")   <-- Save as .png
 
-plt.imshow(arr)
-plt.title("Test Image")
-plt.show()
-
-img.save("test_image.png")
-print("Done!")
+for f in os.listdir("."):
+    if f.endswith(".png"):
+        i = Image.open(f)
+        fn, fext = os.path.splitext(f)
+        i.save("test-jpgs/{}.jpg".format(fn))
