@@ -1,20 +1,15 @@
 from PIL import Image
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Create a blue image
 img = Image.new("RGB", (300, 300), "blue")
 
-# Convert the image to a NumPy array so we can edit pixels
-img_array = np.array(img)
+arr = np.array(img)
+print("Shape:", arr.shape)
 
-# Change a square in the middle to white
-img_array[100:200, 100:200] = [255, 255, 255]
+plt.imshow(arr)
+plt.title("Test Image")
+plt.show()
 
-# Convert the array back to an image
-result = Image.fromarray(img_array)
-
-# Save the result to a file
-result.save("science_fair_result.png")
-
-print("Image saved as science_fair_result.png")
-print("Image shape:", img_array.shape)
+img.save("test_image.png")
+print("Done!")
