@@ -1,19 +1,11 @@
 #https://www.youtube.com/watch?v=6Qs3wObeWwc
 
-from PIL import Image
-import os
+from PIL import Image, ImageFilter  #<--Module for blurring
 
-for f in os.listdir("."):
-    if os.path.splitext(f)[1].lower() == ".png":
-        i = Image.open(f)
-        fn, fext = os.path.splitext(f)
-        #i.convert(mode="L").save(f"{fn}-grayscale{fext}")
-        #i.convert(mode="P").save(f"{fn}-8bit{fext}")
-        i.convert(mode="RGBA").save(f"{fn}-alpha{fext}")  #<-- Allows for transparency
+image1 = Image.open("CheesecakePic.png")
 
-image1 = Image.open('CheesecakePic.png')
-image1.rotate(90).save('Cheesecake+90.png')
+#Blur with input for radius (defualt = 2)
+image1.filter(ImageFilter.GaussianBlur(15)).save("BlurryCheesecake1.png")
 
-image1.convert("RGBA")
-image1.putalpha(128)
-image1.save("CheesecakeTRAN.png")
+#Basic Blurring
+image1.filter(ImageFilter.BLUR()).save("BlurryCheesecake2.png")
