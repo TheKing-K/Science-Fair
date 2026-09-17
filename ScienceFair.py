@@ -1,11 +1,16 @@
-#https://www.youtube.com/watch?v=6Qs3wObeWwc
+from PIL import Image, ImageDraw
 
-from PIL import Image, ImageFilter  #<--Module for blurring
+im = Image.open("CheesecakePic.png").convert("RGBA") #Open "CheesecakePic.png" with alpha layer
 
-image1 = Image.open("CheesecakePic.png")
+sym = Image.new('RGBA', (980, 980), (0, 0, 0, 0)) #Create filter image with alpha layer
+sd = ImageDraw.Draw(sym) #Convert to drawable image
 
-#Blur with input for radius (defualt = 2)
-image1.filter(ImageFilter.GaussianBlur(15)).save("BlurryCheesecake1.png")
+#                                    R, G, B  , A
+sd.ellipse((90,90,890,890), outline=(0, 0, 255, 20), width=20) #Draws a thick blue circle
 
-#Basic Blurring
-image1.filter(ImageFilter.BLUR()).save("BlurryCheesecake2.png")
+sd.line((490,90,490,890), fill=(0, 0, 255, 20), width=20) #Draws a thick blue plus sign
+sd.line((90,490,890,490), fill=(0, 0, 255, 20), width=20)
+
+sym.save("WatermarkBASE.png")
+
+Image.alpha_composite(im, sym).save("WatermarkedBLUE.png")
